@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>San Gil Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #2e0854 0%, #16022e 70%, #0a0118 100%);
+      background-attachment: fixed;
+      color: #ffffff;
+      font-family: 'Nunito', sans-serif;
+      min-height: 100vh;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        radial-gradient(circle, rgba(255, 235, 59, 0.15) 2px, transparent 2px),
+        radial-gradient(circle, rgba(233, 30, 99, 0.15) 2px, transparent 2px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 3rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fff200;
+      text-shadow: 
+        3px 3px 0px #ff0055,
+        6px 6px 0px #00d2ff,
+        9px 9px 15px rgba(0,0,0,0.8);
+      display: inline-block;
+      transform: rotate(-2deg);
+      padding: 10px 25px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 4px dashed #ff0055;
+      border-radius: 20px;
+    }
+
+    .table-wrapper {
+      background: rgba(20, 5, 45, 0.85);
+      border: 4px solid #00d2ff;
+      border-radius: 20px;
+      box-shadow: 
+        0 0 25px rgba(0, 210, 255, 0.4),
+        inset 0 0 15px rgba(0, 210, 255, 0.2);
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    thead {
+      background: linear-gradient(90deg, #ff0055 0%, #ff5e00 50%, #fff200 100%);
+    }
+
+    th {
+      font-family: 'Fredoka One', cursive;
+      color: #ffffff;
+      font-size: 1.25rem;
+      padding: 15px 20px;
+      text-shadow: 2px 2px 0px #000;
+      letter-spacing: 1px;
+      border-bottom: 3px solid #00d2ff;
+    }
+
+    th.col-img { width: 110px; text-align: center; }
+    th.col-title { text-align: left; }
+    th.col-action { width: 140px; text-align: center; }
+
+    tbody tr {
+      border-bottom: 2px solid rgba(0, 210, 255, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    tbody tr:hover {
+      background-color: rgba(255, 242, 0, 0.15);
+      transform: scale(1.01);
+    }
+
+    td {
+      padding: 12px 18px;
+      vertical-align: middle;
+    }
+
+    .img-box {
+      width: 75px;
+      height: 75px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 3px solid #fff200;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    tbody tr:hover .img-box img {
+      transform: scale(1.15) rotate(3deg);
+    }
+
+    .game-name {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .game-name::before {
+      content: "★";
+      color: #ff0055;
+      font-size: 1.2rem;
+    }
+
+    .play-btn {
+      display: inline-block;
+      text-decoration: none;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.05rem;
+      color: #ffffff;
+      background: linear-gradient(180deg, #00ff66 0%, #009933 100%);
+      padding: 10px 22px;
+      border-radius: 30px;
+      border: 2px solid #ffffff;
+      box-shadow: 
+        0 4px 0px #005511,
+        0 6px 10px rgba(0,0,0,0.4);
+      text-shadow: 1px 1px 2px #000;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .play-btn:hover {
+      background: linear-gradient(180deg, #33ff88 0%, #00cc44 100%);
+      transform: translateY(-2px);
+      box-shadow: 
+        0 6px 0px #005511,
+        0 8px 15px rgba(0,255,102,0.5);
+    }
+
+    .play-btn:active {
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 0px #005511,
+        0 3px 5px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      th, td { padding: 10px 8px; }
+      .game-name { font-size: 0.95rem; }
+      .img-box { width: 55px; height: 55px; }
+      .play-btn { padding: 8px 14px; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>San Gil Center</h1>
+    </header>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-img">Juego</th>
+            <th class="col-title">Nombre</th>
+            <th class="col-action">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&q=80" alt="2048" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">2048</div></td>
+            <td class="col-action">
+              <a href="2048_ver2-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=150&q=80" alt="Angelo's Slime Blast" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Angelo's Slime Blast</div></td>
+            <td class="col-action">
+              <a href="Angelo-s_Slime_Blast-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1606168094336-48f205276929?w=150&q=80" alt="Buscaminas" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Buscaminas</div></td>
+            <td class="col-action">
+              <a href="buscaminas-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?w=150&q=80" alt="Frogger Modificado" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Frogger Modificado</div></td>
+            <td class="col-action">
+              <a href="frogger modificado/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=150&q=80" alt="Game JavaScript" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Game JavaScript</div></td>
+            <td class="col-action">
+              <a href="Game_JavaScript-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=150&q=80" alt="Introduction JavaScript" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Introduction JavaScript</div></td>
+            <td class="col-action">
+              <a href="introduction_java_script-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150&q=80" alt="Java Script Main" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Java Script Main</div></td>
+            <td class="col-action">
+              <a href="java_script-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1628277613967-6abca504d0ac?w=150&q=80" alt="JavaScript Tetris" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">JavaScript Tetris</div></td>
+            <td class="col-action">
+              <a href="javascript_tetris-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1552820728-8b83922529d0?w=150&q=80" alt="JavaScript Main" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">JavaScript Main</div></td>
+            <td class="col-action">
+              <a href="javascript-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=150&q=80" alt="JavaScript Game" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">JavaScript Game</div></td>
+            <td class="col-action">
+              <a href="javascriptgame-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150&q=80" alt="Juegitos HTML" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Juegitos HTML</div></td>
+            <td class="col-action">
+              <a href="juegitos_html-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1580234811497-9df7fd2f357e?w=150&q=80" alt="Juego Java" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Juego Java</div></td>
+            <td class="col-action">
+              <a href="juego_java-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=150&q=80" alt="Juego JavaScript" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Juego JavaScript</div></td>
+            <td class="col-action">
+              <a href="Juego_JavaScript-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=150&q=80" alt="Juego Pacman" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Juego Pacman</div></td>
+            <td class="col-action">
+              <a href="juego_pacman-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=150&q=80" alt="Juego Java 2" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Juego Java 2</div></td>
+            <td class="col-action">
+              <a href="juego-java-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=150&q=80" alt="Mi Juego" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Mi Juego</div></td>
+            <td class="col-action">
+              <a href="mi_juego-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&q=80" alt="Snake" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Snake</div></td>
+            <td class="col-action">
+              <a href="Snake-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=150&q=80" alt="Space Game" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Space Game</div></td>
+            <td class="col-action">
+              <a href="space_game-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1606168094336-48f205276929?w=150&q=80" alt="Sudoku" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Sudoku</div></td>
+            <td class="col-action">
+              <a href="Sudoku-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-img">
+              <div class="img-box">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150&q=80" alt="Versión 2 Juego" onerror="this.src='imagen.jpeg'">
+              </div>
+            </td>
+            <td><div class="game-name">Versión 2 Juego</div></td>
+            <td class="col-action">
+              <a href="version2_juego-main/index.html" class="play-btn">Jugar</a>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
